@@ -6,7 +6,7 @@
 /*   By: sanghkim <atlanboa@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/15 04:28:01 by sanghkim          #+#    #+#             */
-/*   Updated: 2021/01/16 03:54:58 by sanghkim         ###   ########.fr       */
+/*   Updated: 2021/01/16 18:38:19 by sanghkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@
 # define SUCCESS 1
 # define SUCCESS_EOF 0
 
-int		get_next_line(int fd, char **line);
+int		get_next_line(int fd, char **line, int idx);
 char	*ft_strndup(char *str, size_t n);
 char	*ft_strchr(const char *s, int c);
 char	*ft_strjoin(char *s1, char *s2);

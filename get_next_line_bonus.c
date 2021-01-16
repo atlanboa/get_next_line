@@ -6,17 +6,23 @@
 /*   By: sanghkim <atlanboa@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/15 04:27:30 by sanghkim          #+#    #+#             */
-/*   Updated: 2021/01/16 04:03:17 by sanghkim         ###   ########.fr       */
+/*   Updated: 2021/01/16 18:38:33 by sanghkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-int	get_ret_value(char **buf, char **line, char *nl_ptr)
+int	get_ret_value(char **buf, char **line, char *nl_ptr, int idx)
 {
 	char	*tmp;
 
-	if (nl_ptr)
+	if (idx < 0)
+	{
+		if (*buf)
+			free(*buf);
+		return (ERROR);
+	}
+	else if (nl_ptr)
 	{
 		*line = ft_strndup(*buf, nl_ptr - *buf);
 		tmp = ft_strndup(nl_ptr + 1, ft_strlen(nl_ptr + 1));
@@ -42,7 +48,7 @@ int	get_next_line(int fd, char **line)
 	char			*ptr;
 	int				idx;
 
-	if (fd < 0 || fd > OPEN_MAX || !line || BUFFER_SIZE <= 0)
+	if (fd < 0 || fd >= OPEN_MAX || !line || BUFFER_SIZE <= 0)
 		return (ERROR);
 	if (!fd_buf[fd])
 		fd_buf[fd] = ft_strndup("", 1);
@@ -57,5 +63,6 @@ int	get_next_line(int fd, char **line)
 			free(fd_buf[fd]);
 		fd_buf[fd] = ptr;
 	}
-	return (idx < 0 ? ERROR : get_ret_value(&fd_buf[fd], line, ptr));
+	return (get_ret_value(&fd_buf[fd], line, ptr, idx));
 }
+
