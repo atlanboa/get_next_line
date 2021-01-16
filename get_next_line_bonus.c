@@ -6,7 +6,7 @@
 /*   By: sanghkim <atlanboa@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/15 04:27:30 by sanghkim          #+#    #+#             */
-/*   Updated: 2021/01/16 18:38:33 by sanghkim         ###   ########.fr       */
+/*   Updated: 2021/01/16 19:14:39 by sanghkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,11 +44,12 @@ int	get_ret_value(char **buf, char **line, char *nl_ptr, int idx)
 int	get_next_line(int fd, char **line)
 {
 	static char		*fd_buf[OPEN_MAX];
-	char			buf[BUFFER_SIZE + 1];
+	char			*buf;
 	char			*ptr;
 	int				idx;
 
-	if (fd < 0 || fd >= OPEN_MAX || !line || BUFFER_SIZE <= 0)
+	if (fd < 0 || fd >= OPEN_MAX || !line || BUFFER_SIZE <= 0
+	|| !(buf = malloc(BUFFER_SIZE + 1)))
 		return (ERROR);
 	if (!fd_buf[fd])
 		fd_buf[fd] = ft_strndup("", 1);
@@ -63,6 +64,7 @@ int	get_next_line(int fd, char **line)
 			free(fd_buf[fd]);
 		fd_buf[fd] = ptr;
 	}
+	if (buf)
+		free(buf);
 	return (get_ret_value(&fd_buf[fd], line, ptr, idx));
 }
-
