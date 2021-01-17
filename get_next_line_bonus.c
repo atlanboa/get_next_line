@@ -6,7 +6,7 @@
 /*   By: sanghkim <atlanboa@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/15 04:27:30 by sanghkim          #+#    #+#             */
-/*   Updated: 2021/01/16 19:14:39 by sanghkim         ###   ########.fr       */
+/*   Updated: 2021/01/17 18:44:03 by sanghkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,8 +57,6 @@ int	get_next_line(int fd, char **line)
 	&& (idx = read(fd, buf, BUFFER_SIZE)) > 0)
 	{
 		buf[idx] = '\0';
-		if (ptr)
-			free(ptr);
 		ptr = fd_buf[fd] ? ft_strjoin(fd_buf[fd], buf) : ft_strndup(buf, idx);
 		if (fd_buf[fd])
 			free(fd_buf[fd]);
