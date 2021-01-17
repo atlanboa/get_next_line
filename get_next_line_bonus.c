@@ -6,11 +6,11 @@
 /*   By: sanghkim <atlanboa@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/15 04:27:30 by sanghkim          #+#    #+#             */
-/*   Updated: 2021/01/17 18:44:03 by sanghkim         ###   ########.fr       */
+/*   Updated: 2021/01/17 22:23:57 by sanghkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 
 int	get_ret_value(char **buf, char **line, char *nl_ptr, int idx)
 {
@@ -57,7 +57,7 @@ int	get_next_line(int fd, char **line)
 	&& (idx = read(fd, buf, BUFFER_SIZE)) > 0)
 	{
 		buf[idx] = '\0';
-		ptr = fd_buf[fd] ? ft_strjoin(fd_buf[fd], buf) : ft_strndup(buf, idx);
+		ptr = fd_buf[fd] ? ft_strjoin(fd_buf[fd], buf);
 		if (fd_buf[fd])
 			free(fd_buf[fd]);
 		fd_buf[fd] = ptr;
